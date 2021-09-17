@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bank';
+
+  transferencia: any;
+
+  transfer($event: any){
+    console.log($event);
+    this.transferencia = $event;
+  }
 }
