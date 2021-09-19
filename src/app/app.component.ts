@@ -13,7 +13,4 @@ export class AppComponent {
 
   }
 
-  transfer($event: any){
-    this.service.adicionar($event);
-  }
 }

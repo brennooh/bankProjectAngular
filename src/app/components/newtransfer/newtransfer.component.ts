@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Transferencia } from 'src/app/models/transferencia.model';
 import { TransfersService } from 'src/app/services/transfers.service';
 
@@ -15,7 +16,7 @@ export class NewTransferComponent implements OnInit {
   valor!: number;
   destino!: number;
   
-  constructor(private service: TransfersService){};
+  constructor(private service: TransfersService, private router: Router){};
 
   transferOnClick(){
     console.log("testando");
@@ -23,9 +24,9 @@ export class NewTransferComponent implements OnInit {
     this.service.adicionar(valorEmitir).subscribe(resultado => {
       console.log(resultado);
       this.clearInput();
-    });
+      this.router.navigateByUrl('extrato');
+    }, error => console.error (error));
     
-    this.clearInput();
   }
 
   clearInput(){
