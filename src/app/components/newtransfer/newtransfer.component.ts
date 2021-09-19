@@ -1,5 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { Transferencia } from 'src/app/models/transferencia.model';
+import { TransfersService } from 'src/app/services/transfers.service';
 
 @Component({
   selector: 'app-newtransfer',
@@ -13,9 +15,16 @@ export class NewTransferComponent implements OnInit {
   valor!: number;
   destino!: number;
   
+  constructor(private service: TransfersService){};
+
   transferOnClick(){
     console.log("testando");
-    this.onTransfer.emit({valor: this.valor, destino: this.destino});
+    const valorEmitir: Transferencia = {valor: this.valor, destino: this.destino};
+    this.service.adicionar(valorEmitir).subscribe(resultado => {
+      console.log(resultado);
+      this.clearInput();
+    });
+    
     this.clearInput();
   }
 
@@ -23,7 +32,6 @@ export class NewTransferComponent implements OnInit {
     this.valor = 0;
     this.destino = 0;
   }
-  constructor() { }
 
   ngOnInit(): void {
   }

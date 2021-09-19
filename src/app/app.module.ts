@@ -1,22 +1,35 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NewTransferComponent } from './components/newtransfer/newtransfer.component';
+import { ExtractComponent } from './components/extract/extract.component';
+import { registerLocaleData } from '@angular/common';
+import localtePt from '@angular/common/locales/pt';
+import { HttpClientModule } from '@angular/common/http';
+
+registerLocaleData(localtePt, 'pt');
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewTransferComponent
+    NewTransferComponent,
+    ExtractComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'pt' },
+  {
+    provide: DEFAULT_CURRENCY_CODE,
+    useValue: 'BRL',
+  },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
